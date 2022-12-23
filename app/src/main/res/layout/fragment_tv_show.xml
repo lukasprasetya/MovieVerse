@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.tvshow.TvShowFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tvshow_fragm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_row" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        fab:menu_animationDelayPerItem="50"
+        fab:menu_backgroundColor="@color/transparent"
+        fab:menu_buttonSpacing="0dp"
+        fab:menu_colorNormal="@color/white"
+        fab:menu_colorPressed="@color/mybackground"
+        fab:menu_colorRipple="@color/white"
+        fab:menu_fab_label="Sort Movie"
+        fab:menu_fab_size="normal"
+        fab:menu_icon="@drawable/ic_baseline_sort_24"
+        fab:menu_labels_colorNormal="@color/white"
+        fab:menu_labels_colorPressed="@color/mybackground"
+        fab:menu_labels_colorRipple="@color/white"
+        fab:menu_labels_cornerRadius="10dp"
+        fab:menu_labels_ellipsize="none"
+
+        fab:menu_labels_maxLines="1"
+        fab:menu_labels_position="left"
+        fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        fab:menu_labels_showShadow="true"
+        fab:menu_labels_singleLine="false"
+        fab:menu_labels_textColor="@color/yellow_item"
+        fab:menu_labels_textSize="14sp"
+        fab:menu_openDirection="up"
+        fab:menu_shadowColor="@color/shadow"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="4dp"
+        fab:menu_showShadow="true">
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/newest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_calendar_today_24"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/mybackground"
+            fab:fab_colorRipple="@color/white"
+            fab:fab_label="Newest"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_star_24"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/mybackground"
+            fab:fab_colorRipple="@color/white"
+            fab:fab_label="Best Vote"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/random"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_360_24"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/mybackground"
+            fab:fab_colorRipple="@color/white"
+            fab:fab_label="Random"
+            fab:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar_fragm_tvshow"
+        android:layout_gravity="center"/>
+
+</FrameLayout>

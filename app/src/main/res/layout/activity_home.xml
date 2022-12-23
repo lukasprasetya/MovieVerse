@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mybackground"
+    tools:context=".ui.home.HomeActivity">
+
+   <!-- <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_home"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#0F9D58"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+
+
+
+    <com.synnapps.carouselview.CarouselView
+        android:id="@+id/carousel_home"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        app:indicatorVisibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:slideInterval="3000">
+
+     <ImageView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:src="@drawable/head_home3"
+         />
+    </com.synnapps.carouselview.CarouselView>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/mybackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/carousel_home"
+        app:tabIndicatorColor="@color/yellowelement"
+        app:tabSelectedTextColor="@color/yellowelement"
+        app:tabTextColor="@color/white" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout_home" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

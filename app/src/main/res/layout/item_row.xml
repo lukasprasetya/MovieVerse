@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_item_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="16dp"
+    android:paddingTop="16dp"
+
+    app:cardBackgroundColor="@color/yellow_item"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_item_row"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/poster_list"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="@string/image_poster_list"
+            android:src="@drawable/dummyphoto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_rate_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto_light"
+            android:gravity="center"
+            android:text="@string/_8_1"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:drawableStartCompat="@drawable/ic_baseline_star_24_row"
+            app:layout_constraintBottom_toTopOf="@id/tv_title_list"
+            app:layout_constraintStart_toEndOf="@id/poster_list"
+            app:layout_constraintTop_toTopOf="@id/poster_list" />
+
+        <TextView
+            android:id="@+id/tv_title_list"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/movie_title"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_release_list"
+            app:layout_constraintStart_toStartOf="@id/tv_rate_list"
+            app:layout_constraintTop_toBottomOf="@id/tv_rate_list" />
+
+        <TextView
+            android:id="@+id/tv_release_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="@string/releasedate"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/poster_list"
+            app:layout_constraintStart_toStartOf="@id/tv_rate_list"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_list" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/progressBar_list"/>
+</androidx.cardview.widget.CardView>

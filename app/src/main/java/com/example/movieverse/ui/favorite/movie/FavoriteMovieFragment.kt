@@ -1,0 +1,112 @@
+package com.example.movieverse.ui.favorite.movie
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagedList
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.movieverse.R
+import com.example.movieverse.data.source.local.entity.MovieEntity
+import com.example.movieverse.databinding.FragmentFavoriteMovieBinding
+import com.example.movieverse.ui.favorite.FavoriteMovieViewModel
+import com.example.movieverse.utils.SortUtils
+import com.example.movieverse.viewmodel.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
+
+class FavoriteMovieFragment : Fragment() {
+
+    private var _fragmentFavMoviesBinding: FragmentFavoriteMovieBinding? = null
+    private val fragmentFavMovieBinding get() = _fragmentFavMoviesBinding!!
+
+    private lateinit var movieAdapter: FavoriteMovieAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _fragmentFavMoviesBinding = FragmentFavoriteMovieBinding.inflate(inflater, container, false)
+        return fragmentFavMovieBinding.root
+    }
+
+    private lateinit var viewModel: FavoriteMovieViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        itemTouchHelper.attachToRecyclerView(fragmentFavMovieBinding.rvFavMovieFragm)
+
+        val factory = ViewModelFactory.getInstance(requireActivity())
+        viewModel = ViewModelProvider(this, factory)[FavoriteMovieViewModel::class.java]
+
+        movieAdapter = FavoriteMovieAdapter()
+
+        fragmentFavMovieBinding.progressBarFragmFavMovie.visibility = View.VISIBLE
+        setList(SortUtils.RANDOM)
+
+        with(fragmentFavMovieBinding.rvFavMovieFragm) {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = movieAdapter
+        }
+
+        fragmentFavMovieBinding.random.setOnClickListener { setList(SortUtils.RANDOM) }
+        fragmentFavMovieBinding.vote.setOnClickListener { setList(SortUtils.BEST_VOTE) }
+        fragmentFavMovieBinding.newest.setOnClickListener { setList(SortUtils.NEWEST) }
+    }
+
+    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+        override fun getMovementFlags(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder
+        ): Int {
+            return makeMovementFlags(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+        }
+
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            return true
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            if (view != null) {
+                val swipedPosition = viewHolder.adapterPosition
+                val movieEntity = movieAdapter.getSwipedData(swipedPosition)
+                movieEntity?.let { viewModel.setFavorite(it) }
+                val snackbar = Snackbar.make(view as View, R.string.undo_msg, Snackbar.LENGTH_LONG)
+                snackbar.setAction(R.string.yes_msg) { _ ->
+                    movieEntity?.let { viewModel.setFavorite(it) }
+                }
+                snackbar.show()
+            }
+        }
+    })
+
+    private fun setList(sort: String) {
+        viewModel.getFavoriteMovies(sort).observe(viewLifecycleOwner, moviesObserver)
+    }
+
+    private val moviesObserver = Observer<PagedList<MovieEntity>> { movies ->
+        if (movies.isNotEmpty()) {
+            fragmentFavMovieBinding.progressBarFragmFavMovie.visibility = View.GONE
+            movieAdapter.submitList(movies)
+            movieAdapter.notifyDataSetChanged()
+        } else {
+            fragmentFavMovieBinding.progressBarFragmFavMovie.visibility = View.GONE
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _fragmentFavMoviesBinding = null
+    }
+}
